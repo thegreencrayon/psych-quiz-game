@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Display site based on user's device-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--Styling and font-->
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <title>Psych RN Quiz</title>
+    </head>
+    <body>
+        <section id="start-screen">
+            <!--Start screen gives an introduction to quiz and has button to start game.-->
+            <h1>Psych RN Quiz</h1>
+            <div class="quiz-intro">
+                <p>Ready to test your psych nursing skills?</p>
+                <p>This quick game has 10 questions covering key concepts.</p>
+                <p>Pick the best answer and have fun - no pressure, just learning!</p>
+            </div>
+            <button id="start-button" type="button">Start</button>
+        </section>
+        <section id="question-card">
+            <!--Question card includes the: (1) Question (2) Image (3) Four answer choices (4) Submit answer button-->
+            <p id="question">Q1. Question?</p>
+            <div id="question-image-wrapper"><img id="question-image" alt="image"></div>
+            <div id="option-container">
+                <!--Each option has an image asset("banner-layered.png") and span text overlay-->
+                <button class="option" data-option="A">
+                    <img src="" alt="Option A">
+                    <span class="option-text"></span>
+                </button>
+                <button class="option" data-option="B">
+                    <img src="" alt="Option B">
+                    <span class="option-text"></span>
+                </button>
+                <button class="option" data-option="C">
+                    <img src="" alt="Option C">
+                    <span class="option-text"></span>
+                </button>
+                <button class="option" data-option="D">
+                    <img src="" alt="Option D">
+                    <span class="option-text"></span>
+                </button>
+            </div>
+        <button id="submit-answer" type="button">Submit</button>
+        </section>
+        <section id="summary-card">
+            <!--Left side displays score-->
+            <div id="score-display">
+                <p id="score-text">You scored a</p>
+            </div>
+            <strong id="score-percent">100%</strong>
+            <!--Right side shows tailored statistics & retry button-->
+            <div id="right-side">
+                <!--Each quest category contains name and also percent correct indicated by bar-->
+                <div class="category-result">
+                    <p class="category-label">Pharmacology</p>
+                    <div class="bar"><div class="bar-fill" style="width: 10%;"></div></div>
+                </div>
+                <div class="category-result">
+                    <p class="category-label">Therapeutic Communication</p>
+                    <div class="bar"><div class="bar-fill" style="width: 10%;"></div></div>
+                </div>
+                <div class="category-result">
+                    <p class="category-label">Safety</p>
+                    <div class="bar"><div class="bar-fill" style="width: 10%;"></div></div>
+                </div>
+                <button id="retry" type="button">Try again?</button>
+            </div>
+        </section>
+
+    </body>
+</html>
