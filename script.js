@@ -5,6 +5,17 @@ let therapeuticScore = 0;
 let safetyScore = 0;
 
 // question objects
-const questions = [];
+const q1 = {question: "A patient with schizophrenia is experiencing auditory hallucinations. What is the nurse’s best initial response?", image: "./assets/question-pics/soundwave.webp", options: ["Why do you think you hear voices?","The voices aren’t real.","I don’t hear them, but I understand you do.","Ignore the voices."], rightAnswer: 3, category: "therapeutic"};
+const q2 = {question: "A patient is prescribed Haloperidol. Which side effect should the nurse monitor for?", image: "./assets/question-pics/medication.webp", options: ["Extrapyramidal symptoms","High blood pressure","High blood sugar","Rapid heart rate"], rightAnswer: 1, category: "pharmacology"};
+const q3 = {question: "A client with major depressive disorder says, “I have nothing to live for.” What is the priority nursing action?", image: "./assets/question-pics/sad-day.gif", options: ["Encourage journaling","Assess suicidal thoughts","Give antidepressant","Provide reassurance"], rightAnswer: 2, category: "safety"};
+const q4 = {question: "A manic patient is hyperactive and not eating. What intervention is most appropriate?", image: "./assets/question-pics/running.gif", options: ["Large scheduled meals","High-calorie finger foods","Restrict fluid intake","Encourage group meals"], rightAnswer: 2, category: "safety"};
+const q5 = {question: "A patient taking Lithium should be taught to:", image: "./assets/question-pics/medicine2.avif", options: ["Lower salt intake","Consistent salt and fluids","Avoid dairy foods","Take as needed"], rightAnswer: 2, category: "pharmacology"};
+const q6 = {question: "Which defense mechanism involves refusing to accept reality?", image: "./assets/question-pics/wall.avif", options: ["Projection","Regression","Displacement","Denial"], rightAnswer: 4, category: "therapeutic"};
+const q7 = {question: "A client with anxiety is hyperventilating. What is the nurse’s best action?", image: "./assets/question-pics/emergency.jpg", options: ["Tell them calm down","Slow deep breathing","Leave patient alone","Give sedative now"], rightAnswer: 2, category: "therapeutic"};
+const q8 = {question: "A patient with borderline personality disorder is splitting staff. What is the best nursing approach?", image: "./assets/question-pics/split.webp", options: ["Different staff rules","Consistent boundaries","Ignore behavior","Confront aggressively"], rightAnswer: 2, category: "therapeutic"};
+const q9 = {question: "A patient on SSRIs reports improved mood but now has increased energy. Why is this a concern?", image: "./assets/question-pics/medicine3.jpg", options: ["Increased suicide risk","High blood pressure","Serotonin syndrome","Drug tolerance"], rightAnswer: 1, category: "safety"};
+const q10 = {question: "A client experiencing a panic attack should be:", image: "./assets/question-pics/anxious.png", options: ["Leave patient alone","Use restraints","Stay and reassure calmly","Encourage exercise"], rightAnswer: 3, category: "safety"};
 
-const q1 = {question: "", image: "", options: [], rightAnswer: "", category: ""};
+const questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
+
+// query selectors
