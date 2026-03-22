@@ -1,8 +1,10 @@
 // global variables
-let totalScore = 0;
-let pharmScore = 0;
-let therapeuticScore = 0;
-let safetyScore = 0;
+let results = {
+    total: 0,
+    pharm: 0,
+    thera: 0,
+    safety: 0
+}
 
 // question objects
 const q1 = {question: "A patient with schizophrenia is experiencing auditory hallucinations. What is the nurse’s best initial response?", image: "./assets/question-pics/soundwave.webp", options: ["Why do you think you hear voices?","The voices aren’t real.","I don’t hear them, but I understand you do.","Ignore the voices."], rightAnswer: 3, category: "therapeutic"};
@@ -19,3 +21,13 @@ const q10 = {question: "A client experiencing a panic attack should be:", image:
 const questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
 
 // query selectors
+// start-screen
+let startButton = document.getElementById("start-button");
+// question-card
+let questionDisplay = document.getElementById("question");
+let questionImage = document.getElementById("question-image");
+let options = document.querySelectorAll('.option');
+let submitButton = document.getElementById("submit-answer");
+// summary-card
+let percent = document.getElementById("score-percent");
+let retryButton = document.getElementById("retry");
