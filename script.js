@@ -40,9 +40,8 @@ startButton.addEventListener("click", function() {
     document.getElementById("question-card").style.display = "block";
 });
 
-while (questions.length > 0) {
-    loadQuestion();
-}
+loadQuestion();
+let bean = submitQuestion();
 
 // fills in question card with question data
 function loadQuestion() {
@@ -61,7 +60,7 @@ function loadQuestion() {
         span.textContent = q.options[option.dataset.option - 1];
     }
 };
-/*
+// submits users answer
 function submitQuestion() {
     options.forEach(option => {
         option.addEventListener("click", () => {
@@ -69,8 +68,14 @@ function submitQuestion() {
             options.forEach(option => option.classList.remove("selected"));
             option.classList.add("selected");
         });
+        selectedAnswer = document.querySelector(".selected");
     });
-
+    submitButton.addEventListener("click", function() {
+        let selectedAnswer = document.querySelector(".selected");
+        if (selectedAnswer) {
+            document.getElementById("question-card").style.display = "none";
+        }
+    });
 }
-    */
+    
 
