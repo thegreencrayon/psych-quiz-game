@@ -31,3 +31,10 @@ let submitButton = document.getElementById("submit-answer");
 // summary-card
 let percent = document.getElementById("score-percent");
 let retryButton = document.getElementById("retry");
+
+// start button listener
+startButton.addEventListener("click", function() {
+    // hide start screen & show question screen
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("question-card").style.display = "block";
+});

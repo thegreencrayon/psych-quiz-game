@@ -22,32 +22,32 @@
             </div>
             <button id="start-button" type="button">Start</button>
         </section>
-        <section id="question-card">
+        <section id="question-card" style="display: none;">
             <!--Question card includes the: (1) Question (2) Image (3) Four answer choices (4) Submit answer button-->
             <p id="question">Q1. Question?</p>
             <div id="question-image-wrapper"><img id="question-image" alt="image"></div>
             <div id="option-container">
                 <!--Each option has an image asset("banner-layered.png") and span text overlay-->
-                <button class="option" data-option="A">
-                    <img src="" alt="Option A">
+                <button class="option" data-option="1">
+                    <img src="" alt="Option 1">
                     <span class="option-text"></span>
                 </button>
-                <button class="option" data-option="B">
-                    <img src="" alt="Option B">
+                <button class="option" data-option="2">
+                    <img src="" alt="Option 2">
                     <span class="option-text"></span>
                 </button>
-                <button class="option" data-option="C">
-                    <img src="" alt="Option C">
+                <button class="option" data-option="3">
+                    <img src="" alt="Option 3">
                     <span class="option-text"></span>
                 </button>
-                <button class="option" data-option="D">
-                    <img src="" alt="Option D">
+                <button class="option" data-option="4">
+                    <img src="" alt="Option 4">
                     <span class="option-text"></span>
                 </button>
             </div>
         <button id="submit-answer" type="button">Submit</button>
         </section>
-        <section id="summary-card">
+        <section id="summary-card" style="display: none;">
             <!--Left side displays score-->
             <div id="score-display">
                 <p id="score-text">You scored a</p>
@@ -71,6 +71,6 @@
                 <button id="retry" type="button">Try again?</button>
             </div>
         </section>
-
+        <script src="script.js"></script>
     </body>
 </html>
