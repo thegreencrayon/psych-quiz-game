@@ -1,0 +1,8 @@
+#question-image {
+    width: 300px;
+    height: auto;
+}
+
+.selected {
+    background-color: aquamarine;
+}

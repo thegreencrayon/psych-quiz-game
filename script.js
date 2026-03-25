@@ -5,6 +5,7 @@ let results = {
     thera: 0,
     safety: 0
 }
+let questionIteration = 1;
 
 // question objects
 const q1 = {question: "A patient with schizophrenia is experiencing auditory hallucinations. What is the nurse’s best initial response?", image: "./assets/question-pics/soundwave.webp", options: ["Why do you think you hear voices?","The voices aren’t real.","I don’t hear them, but I understand you do.","Ignore the voices."], rightAnswer: 3, category: "therapeutic"};
@@ -38,3 +39,38 @@ startButton.addEventListener("click", function() {
     document.getElementById("start-screen").style.display = "none";
     document.getElementById("question-card").style.display = "block";
 });
+
+while (questions.length > 0) {
+    loadQuestion();
+}
+
+// fills in question card with question data
+function loadQuestion() {
+    // grab one at random
+    let randomIndex = Math.floor(Math.random() * questions.length);
+    let q = questions[randomIndex];
+    // remove question from list
+    questions.splice(randomIndex,1);
+
+    // fill in each field
+    questionDisplay.textContent = `Q${questionIteration}. ${q.question}`;
+    questionImage.src = q.image;
+    for (const option of options) {
+        // query select span
+        let span = option.querySelector(".option-text");
+        span.textContent = q.options[option.dataset.option - 1];
+    }
+};
+/*
+function submitQuestion() {
+    options.forEach(option => {
+        option.addEventListener("click", () => {
+            // only allow to select one option at a time
+            options.forEach(option => option.classList.remove("selected"));
+            option.classList.add("selected");
+        });
+    });
+
+}
+    */
+
