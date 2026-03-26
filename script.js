@@ -1,11 +1,12 @@
 // global variables
 let results = {
     total: 0,
-    pharm: 0,
-    thera: 0,
+    pharmacology: 0,
+    therapeutic: 0,
     safety: 0
 }
 let questionIteration = 1;
+let currentQuestion;
 
 // question objects
 const q1 = {question: "A patient with schizophrenia is experiencing auditory hallucinations. What is the nurse’s best initial response?", image: "./assets/question-pics/soundwave.webp", options: ["Why do you think you hear voices?","The voices aren’t real.","I don’t hear them, but I understand you do.","Ignore the voices."], rightAnswer: 3, category: "therapeutic"};
@@ -50,6 +51,7 @@ function loadQuestion() {
     let q = questions[randomIndex];
     // remove question from list
     questions.splice(randomIndex,1);
+    currentQuestion = q;
 
     // fill in each field
     questionDisplay.textContent = `Q${questionIteration}. ${q.question}`;
@@ -63,19 +65,29 @@ function loadQuestion() {
 // submits users answer
 function submitQuestion() {
     options.forEach(option => {
-        option.addEventListener("click", () => {
+        option.onclick = function() {
             // only allow to select one option at a time
             options.forEach(option => option.classList.remove("selected"));
             option.classList.add("selected");
-        });
+        };
         selectedAnswer = document.querySelector(".selected");
     });
-    submitButton.addEventListener("click", function() {
+    // submit answer and updates score
+    submitButton.onclick = function() {
         let selectedAnswer = document.querySelector(".selected");
         if (selectedAnswer) {
             document.getElementById("question-card").style.display = "none";
         }
-    });
+        // updates score if it is the right answer
+        let selectedAnswerValue = Number(selectedAnswer.dataset.option);
+        if (selectedAnswerValue == currentQuestion.rightAnswer) {
+            results["total"]++;
+            results[currentQuestion.category]++;
+        }
+    };
 }
-    
+// showAnswer()
+
+// nice testers
+// document.getElementById("output").textContent = `total: ${results["total"]} + pharm: ${results["pharmacology"]}+ safety: ${results["safety"]}  + therapeutic: ${results["therapeutic"]}`;
 
