@@ -42,7 +42,8 @@ startButton.addEventListener("click", function() {
 });
 
 loadQuestion();
-let bean = submitQuestion();
+submitQuestion();
+showAnswer();
 
 // fills in question card with question data
 function loadQuestion() {
@@ -75,19 +76,43 @@ function submitQuestion() {
     // submit answer and updates score
     submitButton.onclick = function() {
         let selectedAnswer = document.querySelector(".selected");
-        if (selectedAnswer) {
-            document.getElementById("question-card").style.display = "none";
-        }
+ 
         // updates score if it is the right answer
         let selectedAnswerValue = Number(selectedAnswer.dataset.option);
         if (selectedAnswerValue == currentQuestion.rightAnswer) {
             results["total"]++;
             results[currentQuestion.category]++;
         }
+        showAnswer();
     };
 }
-// showAnswer()
+// displays x or ✓ icon to each option choice after question is submitted
+function showAnswer() {
+    let src;
+    let alt;
 
+    submitButton.onclick = function() {
+        for (const option of options) {
+            // customize icon fields based on correct answer index
+            if (currentQuestion.rightAnswer == Number(option.dataset.option)) {
+                src = "./assets/images/check-green.png";
+                alt = "green check";
+            } else {
+                src = "./assets/images/x-red.png";
+                alt = "red ex";
+            }
+            // create icon
+            let icon = document.createElement("img");
+            icon.src = src;
+            icon.alt = alt;
+            // append icon
+            let iconField = option.querySelector(".icon");
+            iconField.appendChild(icon);
+        }
+    }
+}
+
+// work on show answer
 // nice testers
 // document.getElementById("output").textContent = `total: ${results["total"]} + pharm: ${results["pharmacology"]}+ safety: ${results["safety"]}  + therapeutic: ${results["therapeutic"]}`;
 
