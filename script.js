@@ -26,6 +26,7 @@ const questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
 // start-screen
 let startButton = document.getElementById("start-button");
 // question-card
+let questionCard = document.getElementById("question-card");
 let questionDisplay = document.getElementById("question");
 let questionImage = document.getElementById("question-image");
 let options = document.querySelectorAll('.option');
@@ -44,6 +45,8 @@ startButton.addEventListener("click", function() {
 loadQuestion();
 submitQuestion();
 showAnswer();
+
+
 
 // fills in question card with question data
 function loadQuestion() {
@@ -109,10 +112,20 @@ function showAnswer() {
             let iconField = option.querySelector(".icon");
             iconField.appendChild(icon);
         }
+        // replace submit button with next button
+        submitButton.style.display = "none";
+
+        let nextButton = document.createElement("button");
+        nextButton.id = "next-button";
+        nextButton.type = "button";
+        nextButton.textContent = "Next";
+        questionCard.appendChild(nextButton);
     }
 }
 
-// work on show answer
+// work on now looping this into 10 questions
+// summary card fill ins
+// fkin bars 😭
 // nice testers
 // document.getElementById("output").textContent = `total: ${results["total"]} + pharm: ${results["pharmacology"]}+ safety: ${results["safety"]}  + therapeutic: ${results["therapeutic"]}`;
 
