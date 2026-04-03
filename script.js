@@ -7,6 +7,7 @@ let results = {
 }
 let questionIteration = 1;
 let currentQuestion;
+let quizStatus = "testing";
 
 // question objects
 const q1 = {question: "A patient with schizophrenia is experiencing auditory hallucinations. What is the nurse’s best initial response?", image: "./assets/question-pics/soundwave.webp", options: ["Why do you think you hear voices?","The voices aren’t real.","I don’t hear them, but I understand you do.","Ignore the voices."], rightAnswer: 3, category: "therapeutic"};
@@ -31,6 +32,7 @@ let questionDisplay = document.getElementById("question");
 let questionImage = document.getElementById("question-image");
 let options = document.querySelectorAll('.option');
 let submitButton = document.getElementById("submit-answer");
+let nextButton = document.getElementById("next-button");
 // summary-card
 let percent = document.getElementById("score-percent");
 let retryButton = document.getElementById("retry");
@@ -40,13 +42,25 @@ startButton.addEventListener("click", function() {
     // hide start screen & show question screen
     document.getElementById("start-screen").style.display = "none";
     document.getElementById("question-card").style.display = "block";
+    loadQuestion();
+    allowSelection();
 });
 
-loadQuestion();
-submitQuestion();
-showAnswer();
+// submit button listener
+submitButton.addEventListener("click", () => {
+    // hide question screen and show result screen if all questions done
 
-
+    // present questions
+    if (quizStatus == "testing") {
+        gradeAnswer();
+        showAnswer();
+        swapToNext();
+    } else if (quizStatus == "reviewing") {
+        swapToSubmit();
+        resetFields();
+        loadQuestion();
+    }
+});
 
 // fills in question card with question data
 function loadQuestion() {
@@ -66,8 +80,8 @@ function loadQuestion() {
         span.textContent = q.options[option.dataset.option - 1];
     }
 };
-// submits users answer
-function submitQuestion() {
+// lets user select one of four options
+function allowSelection() {
     options.forEach(option => {
         option.onclick = function() {
             // only allow to select one option at a time
@@ -76,25 +90,21 @@ function submitQuestion() {
         };
         selectedAnswer = document.querySelector(".selected");
     });
-    // submit answer and updates score
-    submitButton.onclick = function() {
-        let selectedAnswer = document.querySelector(".selected");
- 
+}
+// grades option user ultimately selects
+function gradeAnswer() {
+    let selectedAnswer = document.querySelector(".selected");
         // updates score if it is the right answer
         let selectedAnswerValue = Number(selectedAnswer.dataset.option);
         if (selectedAnswerValue == currentQuestion.rightAnswer) {
             results["total"]++;
             results[currentQuestion.category]++;
         }
-        showAnswer();
-    };
 }
 // displays x or ✓ icon to each option choice after question is submitted
 function showAnswer() {
     let src;
     let alt;
-
-    submitButton.onclick = function() {
         for (const option of options) {
             // customize icon fields based on correct answer index
             if (currentQuestion.rightAnswer == Number(option.dataset.option)) {
@@ -112,14 +122,25 @@ function showAnswer() {
             let iconField = option.querySelector(".icon");
             iconField.appendChild(icon);
         }
-        // replace submit button with next button
-        submitButton.style.display = "none";
-
-        let nextButton = document.createElement("button");
-        nextButton.id = "next-button";
-        nextButton.type = "button";
-        nextButton.textContent = "Next";
-        questionCard.appendChild(nextButton);
+}
+// replace submit button text with next
+function swapToNext() {
+    submitButton.textContent ="Next"; 
+    quizStatus = "reviewing";   
+}
+// return submit button text back to submit
+function swapToSubmit() {
+    submitButton.textContent="Submit";
+    quizStatus = "testing";
+}
+// reset fields
+function resetFields() {
+    // remove "selected" class
+    document.querySelector(".selected").classList.remove("selected");
+    // remove icon fields
+    for (const option of options) {
+        let iconImage = option.querySelector("img");
+        iconImage.remove();
     }
 }
 
