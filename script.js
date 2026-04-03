@@ -145,8 +145,11 @@ function resetFields() {
     document.querySelector(".selected").classList.remove("selected");
     // remove icon fields
     for (const option of options) {
-        let iconImage = option.querySelector("img");
-        iconImage.remove();
+        let iconClass = option.querySelectorAll(".icon");
+        for (const individual of iconClass) {
+            let iconImages = individual.querySelectorAll("img");
+            iconImages.forEach(image => image.remove());
+        }
     }
 }
 
