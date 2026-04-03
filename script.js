@@ -26,6 +26,7 @@ const questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
 // query selectors
 // start-screen
 let startButton = document.getElementById("start-button");
+let startCard = document.getElementById("start-screen");
 // question-card
 let questionCard = document.getElementById("question-card");
 let questionDisplay = document.getElementById("question");
@@ -65,6 +66,12 @@ submitButton.addEventListener("click", () => {
         resetFields();
         loadQuestion();
     }
+});
+
+// retry button listener
+retryButton.addEventListener("click", function() {
+    summaryCard.style.display = "none";
+    startCard.style.display = "block";
 });
 
 // fills in question card with question data
@@ -155,7 +162,7 @@ function resetFields() {
 
 // fix the icon repeat
 // event listener for the try again
-// summary card fill ins
+// summary card fill ins (total score, categories)
 // fkin bars 😭
 // nice testers
 // document.getElementById("output").textContent = `total: ${results["total"]} + pharm: ${results["pharmacology"]}+ safety: ${results["safety"]}  + therapeutic: ${results["therapeutic"]}`;
