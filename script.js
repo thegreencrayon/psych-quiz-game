@@ -36,6 +36,7 @@ let nextButton = document.getElementById("next-button");
 // summary-card
 let percent = document.getElementById("score-percent");
 let retryButton = document.getElementById("retry");
+let summaryCard = document.getElementById("summary-card");
 
 // start button listener
 startButton.addEventListener("click", function() {
@@ -49,6 +50,10 @@ startButton.addEventListener("click", function() {
 // submit button listener
 submitButton.addEventListener("click", () => {
     // hide question screen and show result screen if all questions done
+    if (questions.length == 0) {
+        questionCard.style.display = "none";
+        summaryCard.style.display= "block";
+    }
 
     // present questions
     if (quizStatus == "testing") {
@@ -79,6 +84,7 @@ function loadQuestion() {
         let span = option.querySelector(".option-text");
         span.textContent = q.options[option.dataset.option - 1];
     }
+    questionIteration++;
 };
 // lets user select one of four options
 function allowSelection() {
@@ -144,7 +150,8 @@ function resetFields() {
     }
 }
 
-// work on now looping this into 10 questions
+// fix the icon repeat
+// event listener for the try again
 // summary card fill ins
 // fkin bars 😭
 // nice testers
