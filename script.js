@@ -5,6 +5,12 @@ let results = {
     therapeutic: 0,
     safety: 0
 }
+let qCounts = {
+    total: 0,
+    pharmacology: 0,
+    therapeutic: 0,
+    safety: 0
+}
 let questionIteration = 1;
 let currentQuestion;
 let quizStatus = "testing";
@@ -50,22 +56,27 @@ startButton.addEventListener("click", function() {
 
 // submit button listener
 submitButton.addEventListener("click", () => {
-    // hide question screen and show result screen if all questions done
-    if (questions.length == 0) {
-        questionCard.style.display = "none";
-        summaryCard.style.display= "block";
-    }
-
-    // present questions
+    document.getElementById("output").textContent = `total Qs: ${qCounts["total"]} + pharm Qs: ${qCounts["pharmacology"]}+ safety Qs: ${qCounts["safety"]}  + therapeutic Qs: ${qCounts["therapeutic"]}`;
+    // present questions + answers
     if (quizStatus == "testing") {
         gradeAnswer();
+        updateCount();
         showAnswer();
         swapToNext();
+
     } else if (quizStatus == "reviewing") {
+        // checks if there are questions in the bank
+        // hide question screen and show result screen if all questions done
+        if (questions.length == 8) {
+            questionCard.style.display = "none";
+            summaryCard.style.display= "block";
+            displayResults();
+        }
+        // move on to next question if there's still some in bank
         swapToSubmit();
         resetFields();
         loadQuestion();
-    }
+    }    
 });
 
 // retry button listener
@@ -159,11 +170,39 @@ function resetFields() {
         }
     }
 }
+// show scores of quiz (total + category)
+function displayResults() {
+    let pharmPercent = getPercentage("pharmacology");
+    let safetyPercent = getPercentage("safety");
+    let therapyPercent = getPercentage("therapeutic");
+    document.getElementById("score-percent").textContent = getPercentage("total");
+}
+function updateCount() {
+    let qCategory = currentQuestion.category;
+    if (qCategory == "therapeutic") {
+        qCounts["therapeutic"]++;
+    } else if (qCategory == "pharmacology") {
+        qCounts["pharmacology"]++;
+    } else if (qCategory == "safety") {
+        qCounts["safety"]++;
+    } 
+    qCounts["total"] = 10 - questions.length;    
+}
+function getPercentage(category) {
+    let percent = 100 * (results[category] / qCounts[category]);
+    return percent;
+}
 
-// fix the icon repeat
-// event listener for the try again
 // summary card fill ins (total score, categories)
-// fkin bars 😭
+// create makeshift .bar in css
+// create makeshift .bar-fill in css
+// fresh reset after try again
+// create asset .bar 
+// create asset .bar-fill
+// implement start screen assets
+// question page assets
+// result screen assets
 // nice testers
 // document.getElementById("output").textContent = `total: ${results["total"]} + pharm: ${results["pharmacology"]}+ safety: ${results["safety"]}  + therapeutic: ${results["therapeutic"]}`;
-
+// document.getElementById("output").textContent = `total right: ${results["total"]} + pharm: ${results["pharmacology"]}+ safety: ${results["safety"]}  + therapeutic: ${results["therapeutic"]} questions remaining: ${questions.length}`;
+// document.getElementById("output").textContent = `total Qs: ${qCounts["total"]} + pharm Qs: ${qCounts["pharmacology"]}+ safety Qs: ${qCounts["safety"]}  + therapeutic Qs: ${qCounts["therapeutic"]}`;
