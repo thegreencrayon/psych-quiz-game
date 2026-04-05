@@ -28,6 +28,7 @@ const q9 = {question: "A patient on SSRIs reports improved mood but now has incr
 const q10 = {question: "A client experiencing a panic attack should be:", image: "./assets/question-pics/anxious.png", options: ["Leave patient alone","Use restraints","Stay and reassure calmly","Encourage exercise"], rightAnswer: 3, category: "safety"};
 
 const questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
+const usedQuestions = [];
 
 // query selectors
 // start-screen
@@ -69,7 +70,7 @@ submitButton.addEventListener("click", () => {
     } else if (quizStatus == "reviewing") {
         // checks if there are questions in the bank
         // hide question screen and show result screen if all questions done
-        if (questions.length == 0) {
+        if (questions.length == 5) {
             questionCard.style.display = "none";
             summaryCard.style.display= "block";
             displayResults();
@@ -85,6 +86,8 @@ submitButton.addEventListener("click", () => {
 retryButton.addEventListener("click", function() {
     summaryCard.style.display = "none";
     startCard.style.display = "block";
+    resetEverything();
+    document.getElementById("output").textContent = `total Qs: ${qCounts["total"]} + pharm Qs: ${qCounts["pharmacology"]}+ safety Qs: ${qCounts["safety"]}  + therapeutic Qs: ${qCounts["therapeutic"]}`;
 });
 
 // fills in question card with question data
@@ -92,7 +95,9 @@ function loadQuestion() {
     // grab one at random
     let randomIndex = Math.floor(Math.random() * questions.length);
     let q = questions[randomIndex];
-    // remove question from list
+    // add question to used list
+    usedQuestions.push(q);
+    // remove question from bank
     questions.splice(randomIndex,1);
     currentQuestion = q;
 
@@ -159,7 +164,7 @@ function swapToSubmit() {
     submitButton.textContent="Submit";
     quizStatus = "testing";
 }
-// reset fields
+// reset "selected" visual and icon visual
 function resetFields() {
     // remove "selected" class
     document.querySelector(".selected").classList.remove("selected");
@@ -178,22 +183,12 @@ function displayResults() {
     document.getElementById("score-percent").textContent = getPercentage("total");
 
     // category
-    let pharmPercent = getPercentage("pharmacology");
-    let safetyPercent = getPercentage("safety");
-    let therapyPercent = getPercentage("therapeutic");
-    /*
-    for (const bar of categoryBars) {
-        let category = bar.dataset.category;
-        let barFill = bar.getElementsByClassName("bar-fill");
-        barFill = barFill[0];
-        //bar.style.width = `${getPercentage(category)}px`;
-        barFill.style.width = "50px";
-    }*/
-   for (const fill of fillBars) {
+    for (const fill of fillBars) {
         fill.style.width = `${getPercentage(fill.dataset.category)}%`
         fill.textContent= getPercentage(fill.dataset.category);
-   }
+    }
 }
+// counts number of questions answered in each category + total questions
 function updateCount() {
     let qCategory = currentQuestion.category;
     if (qCategory == "therapeutic") {
@@ -205,6 +200,7 @@ function updateCount() {
     } 
     qCounts["total"] = 10 - questions.length;    
 }
+// returns percentage correct of each q category
 function getPercentage(category) {
     // prevents NaN error
     if (qCounts[category] == 0) {
@@ -213,10 +209,24 @@ function getPercentage(category) {
     let percent = 100 * (results[category] / qCounts[category]);
     return percent;
 }
-
-// create makeshift .bar in css
-// create makeshift .bar-fill in css
+function resetEverything() {
+    // results
+    for (const k in results) {
+        results[k] = 0;
+    }
+    // question counts
+    for (const k in qCounts) {
+        qCounts[k] = 0; 
+    }
+    // question bank
+    questionIteration = 1;
+    /* BROKEN
+    for (const question in usedQuestions) {
+        questions.push(question);
+    }*/
+}
 // fresh reset after try again
+    // instead of deleting question, find a better way?
 // create asset .bar 
 // create asset .bar-fill
 // implement start screen assets
