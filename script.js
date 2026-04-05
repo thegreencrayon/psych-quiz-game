@@ -220,10 +220,9 @@ function resetEverything() {
     }
     // question bank
     questionIteration = 1;
-    /* BROKEN
-    for (const question in usedQuestions) {
+    for (const question of usedQuestions) {
         questions.push(question);
-    }*/
+    }
 }
 // fresh reset after try again
     // instead of deleting question, find a better way?
