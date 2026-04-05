@@ -44,6 +44,8 @@ let nextButton = document.getElementById("next-button");
 let percent = document.getElementById("score-percent");
 let retryButton = document.getElementById("retry");
 let summaryCard = document.getElementById("summary-card");
+let categoryBars = document.querySelectorAll(".category-result");
+let fillBars = document.querySelectorAll(".bar-fill");
 
 // start button listener
 startButton.addEventListener("click", function() {
@@ -67,7 +69,7 @@ submitButton.addEventListener("click", () => {
     } else if (quizStatus == "reviewing") {
         // checks if there are questions in the bank
         // hide question screen and show result screen if all questions done
-        if (questions.length == 8) {
+        if (questions.length == 0) {
             questionCard.style.display = "none";
             summaryCard.style.display= "block";
             displayResults();
@@ -172,10 +174,25 @@ function resetFields() {
 }
 // show scores of quiz (total + category)
 function displayResults() {
+    // total
+    document.getElementById("score-percent").textContent = getPercentage("total");
+
+    // category
     let pharmPercent = getPercentage("pharmacology");
     let safetyPercent = getPercentage("safety");
     let therapyPercent = getPercentage("therapeutic");
-    document.getElementById("score-percent").textContent = getPercentage("total");
+    /*
+    for (const bar of categoryBars) {
+        let category = bar.dataset.category;
+        let barFill = bar.getElementsByClassName("bar-fill");
+        barFill = barFill[0];
+        //bar.style.width = `${getPercentage(category)}px`;
+        barFill.style.width = "50px";
+    }*/
+   for (const fill of fillBars) {
+        fill.style.width = `${getPercentage(fill.dataset.category)}%`
+        fill.textContent= getPercentage(fill.dataset.category);
+   }
 }
 function updateCount() {
     let qCategory = currentQuestion.category;
@@ -189,11 +206,14 @@ function updateCount() {
     qCounts["total"] = 10 - questions.length;    
 }
 function getPercentage(category) {
+    // prevents NaN error
+    if (qCounts[category] == 0) {
+        return 0;
+    }
     let percent = 100 * (results[category] / qCounts[category]);
     return percent;
 }
 
-// summary card fill ins (total score, categories)
 // create makeshift .bar in css
 // create makeshift .bar-fill in css
 // fresh reset after try again

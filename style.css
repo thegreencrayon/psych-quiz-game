@@ -8,3 +8,13 @@
 }
 
 
+.bar {
+    background-color: grey;
+    width: 300px;
+    height: 20px;
+}
+
+.bar-fill {
+    background-color: pink;
+    height: 20px;
+}
