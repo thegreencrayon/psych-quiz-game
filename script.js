@@ -224,6 +224,7 @@ function resetEverything() {
         questions.push(question);
     }
 }
+// return back to it
 // fresh reset after try again
     // instead of deleting question, find a better way?
 // create asset .bar 
