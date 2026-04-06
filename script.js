@@ -27,8 +27,7 @@ const q8 = {question: "A patient with borderline personality disorder is splitti
 const q9 = {question: "A patient on SSRIs reports improved mood but now has increased energy. Why is this a concern?", image: "./assets/question-pics/medicine3.jpg", options: ["Increased suicide risk","High blood pressure","Serotonin syndrome","Drug tolerance"], rightAnswer: 1, category: "safety"};
 const q10 = {question: "A client experiencing a panic attack should be:", image: "./assets/question-pics/anxious.png", options: ["Leave patient alone","Use restraints","Stay and reassure calmly","Encourage exercise"], rightAnswer: 3, category: "safety"};
 
-const questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
-const usedQuestions = [];
+let questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
 
 // query selectors
 // start-screen
@@ -96,7 +95,7 @@ function loadQuestion() {
     let randomIndex = Math.floor(Math.random() * questions.length);
     let q = questions[randomIndex];
     // add question to used list
-    usedQuestions.push(q);
+    //usedQuestions.push(q);
     // remove question from bank
     questions.splice(randomIndex,1);
     currentQuestion = q;
@@ -220,13 +219,8 @@ function resetEverything() {
     }
     // question bank
     questionIteration = 1;
-    for (const question of usedQuestions) {
-        questions.push(question);
-    }
+    questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10];
 }
-// return back to it
-// fresh reset after try again
-    // instead of deleting question, find a better way?
 // create asset .bar 
 // create asset .bar-fill
 // implement start screen assets
